@@ -11,14 +11,10 @@ public class Menu {
     }
 
     public List<OrderableProduct> productsWithDiscount(int discount) {
-        List<OrderableProduct> discountedProducts = new ArrayList<>();
-
-        for (OrderableProduct product : products) {
+        return ListUtils.map(products, product -> {
             product.applyDiscount(discount);
-            discountedProducts.add(product);
-        }
-
-        return discountedProducts;
+            return product;
+        });
     }
 
     public List<SubProduct> allSubProducts() {
