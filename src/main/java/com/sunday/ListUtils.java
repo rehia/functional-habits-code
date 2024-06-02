@@ -2,6 +2,7 @@ package com.sunday;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public class ListUtils {
@@ -9,8 +10,7 @@ public class ListUtils {
         List<U> transformedList = new ArrayList<>();
 
         for (T item : list) {
-            U transformedItem = transform.apply(item);
-            transformedList.add(transformedItem);
+            transformedList.add(transform.apply(item));
         }
 
         return transformedList;
@@ -24,5 +24,15 @@ public class ListUtils {
         }
 
         return mapped;
+    }
+
+    static <T, U> U reduce(Iterable<T> items, U startingValue, BiFunction<U, T, U> accumulator) {
+        var finalValue = startingValue;
+
+        for (var entry : items) {
+            finalValue = accumulator.apply(finalValue, entry);
+        }
+
+        return finalValue;
     }
 }

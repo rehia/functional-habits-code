@@ -29,13 +29,11 @@ public class Order {
     }
 
     public int totalAmount() {
-        var totalAmount = 0;
-
-        for (var entry : items.entrySet()) {
-            totalAmount += entry.getKey().price() * entry.getValue();
-        }
-
-        return totalAmount;
+        return ListUtils.reduce(
+            items.entrySet(),
+            0,
+            (total, entry) -> total + entry.getKey().price() * entry.getValue()
+        );
     }
 
     public String number() {
