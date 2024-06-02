@@ -4,20 +4,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Menu {
-    private final List<Product> products;
+    private final List<OrderableProduct> products;
 
-    public Menu(List<Product> products) {
+    public Menu(List<OrderableProduct> products) {
         this.products = products;
     }
 
-    public List<Product> productsWithDiscount(int discount) {
-        List<Product> discountedProducts = new ArrayList<>();
+    public List<OrderableProduct> productsWithDiscount(int discount) {
+        List<OrderableProduct> discountedProducts = new ArrayList<>();
 
-        for (Product product : products) {
+        for (OrderableProduct product : products) {
             product.applyDiscount(discount);
             discountedProducts.add(product);
         }
 
         return discountedProducts;
+    }
+
+    public List<SubProduct> allSubProducts() {
+        List<SubProduct> allProducts = new ArrayList<>();
+
+        for (OrderableProduct product : products) {
+            allProducts.addAll(product.subProducts());
+        }
+
+        return allProducts;
     }
 }
