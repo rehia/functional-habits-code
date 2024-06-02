@@ -1,6 +1,5 @@
 package com.sunday;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Menu {
@@ -18,12 +17,6 @@ public class Menu {
     }
 
     public List<SubProduct> allSubProducts() {
-        List<SubProduct> allProducts = new ArrayList<>();
-
-        for (OrderableProduct product : products) {
-            allProducts.addAll(product.subProducts());
-        }
-
-        return allProducts;
+        return ListUtils.flatMap(products, OrderableProduct::subProducts);
     }
 }

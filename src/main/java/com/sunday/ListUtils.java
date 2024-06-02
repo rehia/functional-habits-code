@@ -15,4 +15,14 @@ public class ListUtils {
 
         return transformedList;
     }
+
+    static <T, U> List<U> flatMap(List<T> items, Function<T, List<U>> mapper) {
+        List<U> mapped = new ArrayList<>();
+
+        for (T item : items) {
+            mapped.addAll(mapper.apply(item));
+        }
+
+        return mapped;
+    }
 }
