@@ -1,5 +1,6 @@
 package com.sunday;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -42,5 +43,20 @@ class MenuTest {
         assertTrue(allSubProducts.contains(comte));
         assertTrue(allSubProducts.contains(champignons));
         assertTrue(allSubProducts.contains(siropDePeche));
+    }
+
+    @Test
+    @Disabled
+    void should_not_change_products_price_in_menu_after_applying_discount() {
+        // Given
+        var menu = new Menu(List.of(ouiche, chips, biere));
+
+        // When
+        menu.productsWithDiscount(100);
+
+        // Then
+        assertEquals(1000, ouiche.price());
+        assertEquals(400, chips.price());
+        assertEquals(600, biere.price());
     }
 }
