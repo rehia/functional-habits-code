@@ -23,7 +23,7 @@ class PlaceOrderCommandTest {
 
     @Test
     void should_place_an_order_and_save() {
-        var orderNumber = "123";
+        var orderNumber = new OrderNumber("123");
         var pendingOrder = new Order(orderNumber);
         pendingOrder.addProduct(ouicheLorraine, 1);
 
@@ -42,7 +42,7 @@ class PlaceOrderCommandTest {
 
     @Test
     void should_not_place_an_order_with_no_items() {
-        var orderNumber = "123";
+        var orderNumber = new OrderNumber("123");
         var pendingOrder = new Order(orderNumber);
 
         when(orders.get(orderNumber)).thenReturn(pendingOrder);
@@ -53,7 +53,7 @@ class PlaceOrderCommandTest {
 
     @Test
     void should_not_place_an_order_already_placed() {
-        var orderNumber = "123";
+        var orderNumber = new OrderNumber("123");
         var orderToPlace = new Order(orderNumber);
         orderToPlace.addProduct(ouicheLorraine, 1);
         orderToPlace.place();

@@ -5,15 +5,15 @@ import java.util.Map;
 
 public class Order {
     private final Map<OrderableProduct, Integer> items;
-    private final String number;
-    private String notes;
+    private final OrderNumber number;
+    private OrderNotes notes;
     private OrderStatus status;
 
-    public Order(String number) {
-        this(null, number);
+    public Order(OrderNumber number) {
+        this(number, null);
     }
 
-    public Order(String notes, String number) {
+    public Order(OrderNumber number, OrderNotes notes) {
         this.number = number;
         this.notes = notes;
         this.items = new HashMap<>();
@@ -36,8 +36,8 @@ public class Order {
         );
     }
 
-    public String number() {
-        return notes;
+    public OrderNumber orderNumber() {
+        return number;
     }
 
     public OrderStatus status() {

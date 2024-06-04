@@ -26,9 +26,9 @@ public class Kitchen {
         }
     }
 
-    public List<String> ordersInPreparation() {
+    public List<OrderNumber> ordersInPreparation() {
         return this.inPreparationOrderQueue.stream()
-            .map(Order::number)
+            .map(Order::orderNumber)
             .toList();
     }
 }

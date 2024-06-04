@@ -1,6 +1,6 @@
 package com.sunday;
 
-public record PlaceOrderCommand(String orderNumber) {
+public record PlaceOrderCommand(OrderNumber orderNumber) {
     public static class Handler {
         private final Orders orders;
 

@@ -11,7 +11,7 @@ class OrderTest {
 
     @Test
     void should_sum_all_items_to_get_total_amount() {
-        var order = new Order("O-1234");
+        var order = new Order(new OrderNumber("O-1234"));
         order.addProduct(ouiche, 1);
         order.addProduct(biere, 2);
 
