@@ -42,6 +42,10 @@ public class Order {
         return notes;
     }
 
+    public OrderStatus status() {
+        return status;
+    }
+
     public void confirm() {
         status = OrderStatus.CONFIRMED;
     }
@@ -51,6 +55,13 @@ public class Order {
     }
 
     public void place() {
+        if (status != OrderStatus.PENDING) {
+            throw new IllegalStateException("Order can only be placed if it is in PENDING status.");
+        }
+
+        if (items.isEmpty()) {
+            throw new IllegalStateException("Order must have at least one item to be placed.");
+        }
         status = OrderStatus.PLACED;
     }
 
