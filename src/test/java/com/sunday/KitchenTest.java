@@ -1,5 +1,8 @@
 package com.sunday;
 
+import com.sunday.order.OrderNotes;
+import com.sunday.order.OrderNumber;
+import com.sunday.order.PendingOrder;
 import org.junit.jupiter.api.Test;
 
 import java.util.stream.Stream;
@@ -16,12 +19,12 @@ class KitchenTest {
         // Given
         var kitchen = new Kitchen();
 
-        var order1 = new Order(new OrderNumber("O-1234"), new OrderNotes("On est assez pressés! Merci de faire vite!"));
+        var order1 = new PendingOrder(new OrderNumber("O-1234"), new OrderNotes("On est assez pressés! Merci de faire vite!"));
         order1.addProduct(ipa, 2);
         order1.addProduct(chips, 1);
-        var order2 = new Order(new OrderNumber("O-1235"));
+        var order2 = new PendingOrder(new OrderNumber("O-1235"));
         order2.addProduct(belgianBeer, 1);
-        var order3 = new Order(new OrderNumber("O-1236"), new OrderNotes("Je crains la coriandre"));
+        var order3 = new PendingOrder(new OrderNumber("O-1236"), new OrderNotes("Je crains la coriandre"));
         order3.addProduct(ipa, 1);
         order3.addProduct(belgianBeer, 1);
 

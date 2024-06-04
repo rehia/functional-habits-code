@@ -6,7 +6,7 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public class ListUtils {
-    static <T, U> List<U> map(List<T> list, Function<T, U> transform) {
+    public static <T, U> List<U> map(List<T> list, Function<T, U> transform) {
         List<U> transformedList = new ArrayList<>();
 
         for (T item : list) {
@@ -16,7 +16,7 @@ public class ListUtils {
         return transformedList;
     }
 
-    static <T, U> List<U> flatMap(List<T> items, Function<T, List<U>> mapper) {
+    public static <T, U> List<U> flatMap(List<T> items, Function<T, List<U>> mapper) {
         List<U> mapped = new ArrayList<>();
 
         for (T item : items) {
@@ -26,7 +26,7 @@ public class ListUtils {
         return mapped;
     }
 
-    static <T, U> U reduce(Iterable<T> items, U startingValue, BiFunction<U, T, U> accumulator) {
+    public static <T, U> U reduce(Iterable<T> items, U startingValue, BiFunction<U, T, U> accumulator) {
         var finalValue = startingValue;
 
         for (var entry : items) {

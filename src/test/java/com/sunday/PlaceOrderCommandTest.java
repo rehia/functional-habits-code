@@ -1,5 +1,9 @@
 package com.sunday;
 
+import com.sunday.order.Order;
+import com.sunday.order.OrderNumber;
+import com.sunday.order.PendingOrder;
+import com.sunday.order.PlacedOrder;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
@@ -7,7 +11,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -24,7 +29,7 @@ class PlaceOrderCommandTest {
     @Test
     void should_place_an_order_and_save() {
         var orderNumber = new OrderNumber("123");
-        var pendingOrder = new Order(orderNumber);
+        var pendingOrder = new PendingOrder(orderNumber);
         pendingOrder.addProduct(ouicheLorraine, 1);
 
         when(orders.get(orderNumber)).thenReturn(pendingOrder);
@@ -37,13 +42,13 @@ class PlaceOrderCommandTest {
         verify(orders).save(orderCaptor.capture());
 
         var savedOrder = orderCaptor.getValue();
-        assertEquals(Order.OrderStatus.PLACED, savedOrder.status());
+        assertInstanceOf(PlacedOrder.class, savedOrder);
     }
 
     @Test
     void should_not_place_an_order_with_no_items() {
         var orderNumber = new OrderNumber("123");
-        var pendingOrder = new Order(orderNumber);
+        var pendingOrder = new PendingOrder(orderNumber);
 
         when(orders.get(orderNumber)).thenReturn(pendingOrder);
 
@@ -54,11 +59,11 @@ class PlaceOrderCommandTest {
     @Test
     void should_not_place_an_order_already_placed() {
         var orderNumber = new OrderNumber("123");
-        var orderToPlace = new Order(orderNumber);
+        var orderToPlace = new PendingOrder(orderNumber);
         orderToPlace.addProduct(ouicheLorraine, 1);
-        orderToPlace.place();
+        var placedOrder = orderToPlace.place();
 
-        when(orders.get(orderNumber)).thenReturn(orderToPlace);
+        when(orders.get(orderNumber)).thenReturn(placedOrder);
 
         var command = new PlaceOrderCommand(orderNumber);
         assertThrows(IllegalStateException.class, () -> handler.handle(command));
