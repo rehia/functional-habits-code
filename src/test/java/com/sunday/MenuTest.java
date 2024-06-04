@@ -46,7 +46,6 @@ class MenuTest {
     }
 
     @Test
-    @Disabled
     void should_not_change_products_price_in_menu_after_applying_discount() {
         // Given
         var menu = new Menu(List.of(ouiche, chips, biere));

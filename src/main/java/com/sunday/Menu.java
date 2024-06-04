@@ -10,10 +10,7 @@ public class Menu {
     }
 
     public List<OrderableProduct> productsWithDiscount(int discount) {
-        return ListUtils.map(products, product -> {
-            product.applyDiscount(discount);
-            return product;
-        });
+        return ListUtils.map(products, product -> product.applyDiscount(discount));
     }
 
     public List<SubProduct> allSubProducts() {

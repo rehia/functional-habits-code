@@ -17,8 +17,8 @@ public class OrderableProduct {
         this(name, price, List.of());
     }
 
-    public void applyDiscount(int discount) {
-        this.price = this.price - discount;
+    public OrderableProduct applyDiscount(int discount) {
+        return new OrderableProduct(name, price - discount, subProducts);
     }
 
     public int price() {
